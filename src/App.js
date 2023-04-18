@@ -1,9 +1,7 @@
-import logo from './logo.svg';
-import './App.css';
 
 const App = () => {
   return (
-    <h1>Hello, react!</h1>
+    <h1>Hello, <span>react!</span></h1>
   );
 }
 
