@@ -13,13 +13,15 @@ class Aloha extends Component {
         this.setState({
             isGreeting: !isGreeting
         })
+    
     }
    
     render() {
-        const helloText = this.state.isGreeting ? "Привіт" : "Прощавай"
+        const helloText = this.state.isGreeting ? "Привіт" : "Прощавай";
+        const {user: {firstName, lastName}} = this.props;
         return (
             <div>
-                {helloText}, {this.props.userName} <button onClick={this.switch}>Switch</button>
+                {helloText}, {firstName} {lastName} <button onClick={this.switch}>Switch</button>
             </div>
         );
     }
