@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Box.css';
 
 class Box extends Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class Box extends Component {
     render() {
         const {counter} = this.state;
         return (
-            <div style={{width: '300px', height: '300px', backgroundColor: 'green'}}
+            <div className='box'
                 onClick={this.increment}>
                 {counter}
             </div>
