@@ -4,6 +4,9 @@ import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <App />
+    <> {/*   <React.Fragment>  */}
+    <App userName="John Doe" userAge={18}/>
+    <App userName="Jane Crow" userAge={40}/>
+    </>
 );
 
