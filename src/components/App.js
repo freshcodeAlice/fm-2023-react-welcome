@@ -1,5 +1,6 @@
 import React from "react";
 import DayPart from "./DayPart";
+import Aloha from './Aloha';
 
 class App extends React.Component {
   constructor(props){
@@ -8,12 +9,10 @@ class App extends React.Component {
 
 
   render(){
-    const {userAge, userName} = this.props;
+
     
     return (
-      <section>
-        <DayPart hours={10} />, {userName}
-      </section>
+      <Aloha userName="John"/>
     ) 
   
   }
