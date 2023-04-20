@@ -15,23 +15,36 @@ class App extends React.Component {
     }, {
       firstName: 'Jack',
       lastName: 'Bow'
+    }, {
+      firstName: 'Rick',
+      lastName: 'Bow'
+    },
+    {
+      firstName: 'Sand',
+      lastName: 'Bow'
+    },
+    {
+      firstName: 'Band',
+      lastName: 'Bow'
     }]
   }
   }
 
+  sortUsers = () => {
+    /*
+    Написати метод, який відсортує масив у стейті за алфавітним порядком по іменам
+    і оновлює масив у стейті
 
-  changeJohn = () => {
-    const changedArray = this.state.users.map((u)=>{
-      if (u.firstName === 'John') {
-        return {
-          firstName: 'Rick',
-          lastName: u.lastName
-        }
-      }
-      return u;
-    })
-    this.setState({users: changedArray})
+    */
+    const {users} = this.state;
+    const newUsersArray = [...users];
+    newUsersArray.sort((a,b) => a.firstName > b.firstName ? 1 : -1);
+
+    this.setState({
+      users: newUsersArray
+    }) // <-- Новий об'єкт стану!!!
   }
+
 
   render(){
     const {users} = this.state;
@@ -40,6 +53,7 @@ class App extends React.Component {
     return (
       <>
        <h1 onClick={this.changeJohn}>Heading</h1>
+       <button onClick={this.sortUsers}>Sort users</button>
        <div>{alohaArray}</div> 
       </>
     ) 
