@@ -20,9 +20,9 @@ class Aloha extends Component {
         const helloText = this.state.isGreeting ? "Привіт" : "Прощавай";
         const {user: {firstName, lastName}} = this.props;
         return (
-            <div>
+            <li>
                 {helloText}, {firstName} {lastName} <button onClick={this.switch}>Switch</button>
-            </div>
+            </li>
         );
     }
 }
