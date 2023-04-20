@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import {format, addSeconds} from 'date-fns';
 
 class Timer extends Component {
    constructor(props){
     super(props);
     this.state = {
-        count: 0
+        time: new Date(0,0,0,0,0,0)
     }
     this.intervalId = null;
    }
@@ -22,7 +23,16 @@ class Timer extends Component {
             //     count: this.state.count + 1
             // })
 
-            this.setState((state) => ({count: state.count+1}))
+            this.setState((state) => ({time: addSeconds(state.time, 1)}))
+
+            /*
+            Робота з нативною датою:
+            1. Перегнати дату в таймштемп
+            2. Додати потрібну кількість мілісекунд
+            3. Перегнати це назад і оновити стан
+            4. 
+
+            */
         }, 1000);
     }
    }
@@ -31,6 +41,7 @@ class Timer extends Component {
    stop = () => {
     console.log('timer stops');
     clearInterval(this.intervalId);
+    this.intervalId = null;
    }
    
    componentWillUnmount() {
@@ -39,11 +50,11 @@ class Timer extends Component {
    
    
     render() {
-        const {count} = this.state;
+        const {time} = this.state;
         return (
             <>
             <h1>
-                {count}
+                {format(time, 'HH:mm:ss')}
             </h1>
                 <button onClick={this.start}>start</button>
                 <button onClick={this.stop}>stop </button>
