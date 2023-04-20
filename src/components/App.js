@@ -52,9 +52,18 @@ class App extends React.Component {
   }
 
 
+  deleteHandler = (id) => {
+    const {users} = this.state;
+    const filtered = users.filter((u) => u.id !== id);
+    this.setState({
+      users: filtered
+    })
+  }
+
+
   render(){
     const {users} = this.state;
-    const alohaArray = users.map(u => <Aloha user={u} key={u.id}/>)
+    const alohaArray = users.map(u => <Aloha user={u} key={u.id} deleteCallback={this.deleteHandler}/>)
     
     return (
       <>

@@ -15,13 +15,21 @@ class Aloha extends Component {
         })
     
     }
+
+    delete = () => {
+        const {user: {id}, deleteCallback} = this.props;
+ //       console.log(this.props.user.id);
+       deleteCallback(id);
+    }
+
    
     render() {
         const helloText = this.state.isGreeting ? "Привіт" : "Прощавай";
         const {user: {firstName, lastName}} = this.props;
         return (
             <li>
-                {helloText}, {firstName} {lastName} <button onClick={this.switch}>Switch</button>
+                {helloText}, {firstName} {lastName} <button onClick={this.switch}>Switch</button> 
+                <button onClick={this.delete}>X</button>
             </li>
         );
     }
