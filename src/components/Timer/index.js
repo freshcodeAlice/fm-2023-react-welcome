@@ -48,6 +48,12 @@ class Timer extends Component {
     this.stop();
    }
    
+
+   clear = () => {
+        this.setState({
+            time: new Date(0,0,0,0,0,0)
+        })
+   } 
    
     render() {
         const {time} = this.state;
@@ -58,10 +64,16 @@ class Timer extends Component {
             </h1>
                 <button onClick={this.start}>start</button>
                 <button onClick={this.stop}>stop </button>
-                <button>clear</button>
+                <button onClick={this.clear}>clear</button>
             </>
         );
     }
 }
 
 export default Timer;
+
+
+/*
+Реалізувати метод clear, який скидає секундомір до 0
+
+*/
