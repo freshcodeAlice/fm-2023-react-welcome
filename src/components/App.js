@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Tree from './Tree';
+import Timer from './Timer';
 
 class App extends Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class App extends Component {
     return (
       <div>
         <button onClick={this.clickhandler}>No more tree</button>
-        {isRendering ? <Tree /> : null }
+        {isRendering ? <Timer /> : null }
       </div>
     );
   }
