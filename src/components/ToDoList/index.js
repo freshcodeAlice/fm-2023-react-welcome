@@ -1,98 +1,58 @@
 import React, { Component } from 'react';
-import {format} from 'date-fns';
+import ToDoForm from './ToDoForm';
+import ToDoItem from './ToDoItem';
 
 class ToDoList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            todo: '',
-            isDone: false,
-            deadline: new Date()
-        }
-    }
-/*
-керовані компоненти:
-1. Маємо стан, який співпадає з кероманим елементом
-2. Керований елемент (input) в кожний момент часу відображає в якості свого value те, що лежить в стані
-3. При зміні даних (при взаємодії) з інпутом маємо ПРИЗВОДИТИ до зміни стану
-
-
-*/
-
-
-
-    submitHandler = (event) => {
-        event.preventDefault();
-        console.log(this.state);
-    }
-
-
-    // changeInputHandler = (event) => {
-    //     this.setState({
-    //         todo: event.target.value
-    //     })
-    // }
-
-    // checkboxHandler = (event) => {
-
-    //     this.setState({
-    //         isDone: event.target.checked
-    //     })
-    // }
-    
-    // dateHandler = (event) => {
-
-    //      this.setState({
-    //          deadline: new Date(event.target.value)
-    //      })
-    // }
-
-    generalHandler = ({target}) => {
-        switch(target.type) {
-            case 'text': {
-                this.setState({
-                    todo: target.value
-                 });
-                 break;
-            }
-            case 'checkbox': {
-                this.setState({
-                     isDone: target.checked
-                 });
-                 break;
-            }
-            case 'datetime-local': {
-                this.setState({
-                 deadline: new Date(target.value)
-              });
-              break;
-            }
+            todoList: []
         }
     }
 
+   addNewItem = (data) => {
+    const {todoList} = this.state;
+    this.setState({
+        todoList: [...todoList,{
+            ...data,
+            id: todoList.length
+        }]
+    })
+   }
 
-    /*
+   changeItem = (newIsDone, id) => {
+    const {todoList} = this.state;
+    const newList = todoList.map((td) => {
+        if (td.id === id) {
+            td.isDone = newIsDone
+        }
+        return td
+    });
+    this.setState({
+        todoList: newList
+    })
+   }
 
-    handler = ({target: {name, value}}) => {
-        this.setState({
-            [name]: value
-        })
-    }
 
-     */
+   deleteItem = (id) => {
+    const {todoList} = this.state;
+    const filtered = todoList.filter(td => td.id !== id);
+    this.setState({
+        todoList: filtered
+    })
+   }
 
     render() {
-        const {todo, isDone, deadline} = this.state;
+        const {todoList} = this.state;
+        const liMap = todoList.map(todo => <ToDoItem 
+                                                todo={todo} key={todo.id} 
+                                                change={this.changeItem}
+                                                delete={this.deleteItem}/>)
         return (
             <>
-                <form onSubmit={this.submitHandler}>
-                    <input type="text" value={todo} onChange={this.generalHandler}/>
-                    <label><input type="checkbox" checked={isDone} onChange={this.generalHandler}/>is done?</label>
-                    <input type="datetime-local" value={format(deadline, "yyyy-MM-dd hh:mm")} onChange={this.generalHandler}/>
-                    <button>Submit</button>
-                </form>
+                <ToDoForm callback={this.addNewItem}/>
                 <ul>
-
+                {liMap}
                 </ul>
             </>
         );
@@ -100,3 +60,12 @@ class ToDoList extends Component {
 }
 
 export default ToDoList;
+
+
+
+/*
+Реалізувати:
+1. Можливість оновлення isDone в кожної ToDoItem окремо
+2. Можливість видалення ToDoItem
+
+*/
