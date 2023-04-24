@@ -9,3 +9,18 @@
 .container * {
     margin-top: 10px;
 }
+
+.input-normal {
+    background-color: beige;
+}
+
+
+.valid {
+    border: 2px solid green;
+    background-color: lightgreen;
+}
+
+.invalid {
+    border: 2px solid red;
+    background-color: lightcoral;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {format} from 'date-fns';
 import styles from './ToDoForm.module.css';
+import cx from 'classnames';
 
 class ToDoForm extends Component {
     constructor(props) {
@@ -8,7 +9,8 @@ class ToDoForm extends Component {
         this.state = {
             todoBody: '',
             isDone: false,
-            deadline: new Date()
+            deadline: new Date(),
+            isInputValid: true
         }
     }
     
@@ -20,6 +22,15 @@ class ToDoForm extends Component {
     generalHandler = ({target}) => {
         switch(target.type) {
             case 'text': {
+                if(target.value.includes(' ')) {
+                    this.setState({
+                        isInputValid: false
+                    })
+                } else {
+                    this.setState({
+                        isInputValid: true
+                    })
+                }
                 this.setState({
                     todoBody: target.value
                  });
@@ -54,12 +65,26 @@ class ToDoForm extends Component {
 
 
     render() {
-        const {todoBody, isDone, deadline} = this.state;
+        const {todoBody, isDone, deadline, isInputValid} = this.state;
+        const cnames = cx(styles['input-normal'], {
+            [styles.valid]: isInputValid,
+            [styles.invalid]: !isInputValid
+        })
         return (
             <form onSubmit={this.submitHandler} className={styles.container}>
                 <h2>What need to be done?</h2>
-                <input type="text" value={todoBody} onChange={this.generalHandler} placeholder="Type your todo"/>
-                <label><input type="checkbox" checked={isDone} onChange={this.generalHandler}/>is done?</label>
+                <input type="text" 
+                value={todoBody} 
+                onChange={this.generalHandler} 
+                placeholder="Type your todo"
+                className={cnames}
+                autoFocus
+                />
+                <label>
+                    <input 
+                    type="checkbox" 
+                    checked={isDone} 
+                    onChange={this.generalHandler}/> is done?</label>
                 <input type="datetime-local" value={format(deadline, "yyyy-MM-dd hh:mm")} onChange={this.generalHandler}/>
                 <button>Submit</button>
             </form>
