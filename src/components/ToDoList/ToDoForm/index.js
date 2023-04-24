@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {format} from 'date-fns';
+import styles from './ToDoForm.module.css';
 
 class ToDoForm extends Component {
     constructor(props) {
@@ -55,8 +56,9 @@ class ToDoForm extends Component {
     render() {
         const {todoBody, isDone, deadline} = this.state;
         return (
-            <form onSubmit={this.submitHandler}>
-                <input type="text" value={todoBody} onChange={this.generalHandler}/>
+            <form onSubmit={this.submitHandler} className={styles.container}>
+                <h2>What need to be done?</h2>
+                <input type="text" value={todoBody} onChange={this.generalHandler} placeholder="Type your todo"/>
                 <label><input type="checkbox" checked={isDone} onChange={this.generalHandler}/>is done?</label>
                 <input type="datetime-local" value={format(deadline, "yyyy-MM-dd hh:mm")} onChange={this.generalHandler}/>
                 <button>Submit</button>

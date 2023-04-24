@@ -1,5 +1,6 @@
 import React from 'react';
 import {format} from 'date-fns';
+import styles from './ToDoItem.module.css';
 
 
 /*
@@ -45,12 +46,18 @@ class ToDoItem extends React.Component {
         const {editMode}= this.state;
         const body = editMode ? <input value={todoBody} onChange={this.bodyChangeHandler}/> : todoBody
         return (
-            <li> 
-            <input type="checkbox" checked={isDone} onChange={this.changeCheckbox}/> - 
-            <span>{body}</span> - 
-            <span>{format(deadline, "yyyy-MM-dd hh:mm")}</span>
+            <li className={styles.item}> 
+            <div>
+                <input type="checkbox" checked={isDone} onChange={this.changeCheckbox}/>  
+                <span className={styles.body}>{body}</span> 
+            </div>
+ 
+            <span className={styles['deadline-date']}>{format(deadline, "yyyy-MM-dd hh:mm")}</span>
+            <div>
             <button onClick={this.changeView}>Edit</button>
             <button onClick={this.deleteChange}>X</button>
+            </div>
+
         </li>
         );
     }

@@ -1,0 +1,11 @@
+.container {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgb(109, 15, 15);
+    padding: 5%;
+}
+
+.container * {
+    margin-top: 10px;
+}

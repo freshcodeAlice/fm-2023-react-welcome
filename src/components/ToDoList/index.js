@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ToDoForm from './ToDoForm';
 import ToDoItem from './ToDoItem';
+import './styles.css';
 
 class ToDoList extends Component {
     constructor(props) {
@@ -66,7 +67,7 @@ class ToDoList extends Component {
         return (
             <>
                 <ToDoForm callback={this.addNewItem}/>
-                <ul>
+                <ul className='container'>
                 {liMap}
                 </ul>
             </>
