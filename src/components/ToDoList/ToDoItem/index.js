@@ -1,6 +1,7 @@
 import React from 'react';
 import {format} from 'date-fns';
 import styles from './ToDoItem.module.css';
+import PropTypes from 'prop-types';
 
 
 /*
@@ -62,6 +63,19 @@ class ToDoItem extends React.Component {
         );
     }
 }
+
+ToDoItem.propTypes = {
+    todo: PropTypes.shape({
+        isDone: PropTypes.bool.isRequired, 
+        todoBody: PropTypes.string.isRequired, 
+        deadline: PropTypes.instanceOf(Date).isRequired, 
+        id: PropTypes.number.isRequired
+    }).isRequired,
+    change: PropTypes.func.isRequired,
+    changeText: PropTypes.func.isRequired,
+    delete: PropTypes.func.isRequired
+}
+
 
 
 export default ToDoItem;
