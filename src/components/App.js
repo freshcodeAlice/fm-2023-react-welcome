@@ -22,11 +22,7 @@ class App extends Component {
     const {isRendering} = this.state; 
     return (
     // <ToDoList />
-    <Aloha user={{
-        firstName: 'Hell',
-        lastName: 'Dog',
-        id: 3
-    }}/>
+    <Aloha user={{}}/>
     );
   }
 }

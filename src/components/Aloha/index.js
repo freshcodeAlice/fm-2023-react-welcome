@@ -36,6 +36,17 @@ class Aloha extends Component {
     }
 }
 
+Aloha.defaultProps = {
+    deleteCallback: () => {
+        console.log('delete callback is absent today')
+    },
+    user: {
+        firstName: 'Anonym',
+        lastName: 'Anonymus',
+        id: 0
+    }
+}
+
 
 Aloha.propTypes = {
     user: PropTypes.shape({
