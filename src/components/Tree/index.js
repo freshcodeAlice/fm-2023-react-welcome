@@ -49,7 +49,7 @@ class Tree extends Component {
         */
         console.log('Render')
         return (
-            <div onClick={this.update}>
+            <div onClick={this.update}> {/* React.createElement() */}
                 Tree
             </div>
         );

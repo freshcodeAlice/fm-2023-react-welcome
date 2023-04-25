@@ -4,28 +4,34 @@ import Tree from './Tree';
  import ToDoList from './ToDoList';
 import Aloha from './Aloha';
 import UserList from './UserList';
+import AlohaDashboard from './AlohaDashboard';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isRendering: true
-    }
   }
   
-  clickhandler = () => {
-    this.setState({
-      isRendering: false
-    })
-  }
-
   render() {
-    const {isRendering} = this.state; 
     return (
-      <UserList />
-
+      <List>
+        <li super-prop="value">First Item</li>
+        <li>Second Item</li>
+        </List>
     );
   }
 }
 
 export default App;
+
+
+function List (props) {
+  console.log(props);
+  return (
+    <article> 
+      <h1>List</h1>
+      <ul>
+       {props.children}
+      </ul>
+    </article>
+  )
+}
