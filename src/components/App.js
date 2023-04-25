@@ -6,6 +6,7 @@ import Aloha from './Aloha';
 import UserList from './UserList';
 import AlohaDashboard from './AlohaDashboard';
 import Layout from './Layout';
+import FlexContainer from './FlexContainer';
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +15,11 @@ class App extends Component {
   
   render() {
     return (
-      <Layout />
+     <FlexContainer fd="row" jc="space-evenly" ai="center" fw="no-wrap">
+      <div>Item1</div>
+      <div>Item2</div>
+      <div>Item3</div>
+     </FlexContainer>
     );
   }
 }
