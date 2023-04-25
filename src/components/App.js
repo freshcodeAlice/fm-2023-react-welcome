@@ -5,6 +5,7 @@ import Tree from './Tree';
 import Aloha from './Aloha';
 import UserList from './UserList';
 import AlohaDashboard from './AlohaDashboard';
+import Layout from './Layout';
 
 class App extends Component {
   constructor(props) {
@@ -13,25 +14,10 @@ class App extends Component {
   
   render() {
     return (
-      <List>
-        <li super-prop="value">First Item</li>
-        <li>Second Item</li>
-        </List>
+      <Layout />
     );
   }
 }
 
 export default App;
 
-
-function List (props) {
-  console.log(props);
-  return (
-    <article> 
-      <h1>List</h1>
-      <ul>
-       {props.children}
-      </ul>
-    </article>
-  )
-}
