@@ -8,20 +8,16 @@ import AlohaDashboard from './AlohaDashboard';
 import Layout from './Layout';
 import FlexContainer from './FlexContainer';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-  }
+function App (props) {
+ 
   
-  render() {
+
     return (
-     <FlexContainer fd="row" jc="space-evenly" ai="center" fw="no-wrap">
-      <div>Item1</div>
-      <div>Item2</div>
-      <div>Item3</div>
-     </FlexContainer>
+      <>
+      <button onClick={() => window.open('/page1.html')}>Open</button>
+      <button onClick={() => window.close()}>Close</button>
+      </>
     );
-  }
 }
 
 export default App;
