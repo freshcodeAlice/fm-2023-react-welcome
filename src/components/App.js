@@ -14,8 +14,9 @@ function App (props) {
 
     return (
       <>
-      <button onClick={() => window.open('/page1.html')}>Open</button>
-      <button onClick={() => window.close()}>Close</button>
+      <button onClick={() => window.location.assign('https://www.wikipedia.org/')}>Assing</button> 
+      <button onClick={() => window.location.reload()}>Reload</button>
+      <button onClick={() => window.location.replace('https://www.wikipedia.org')}>Replace</button>
       </>
     );
 }
