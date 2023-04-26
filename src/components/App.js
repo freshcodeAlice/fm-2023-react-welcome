@@ -22,7 +22,7 @@ class App extends Component {
     return (
         <BrowserRouter>
             <Routes>
-              <Route path='/' element={<AlohaDashboard />} />
+              <Route index element={<AlohaDashboard />} />
               <Route path='/timer' element={<Timer />} />
               <Route path='/spinner' element={<Spinner />} />
               <Route path='/todo' element={<ToDoList />} />
