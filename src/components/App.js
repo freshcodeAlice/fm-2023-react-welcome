@@ -6,7 +6,10 @@ import ToDoList from './ToDoList';
 import WindowResizer from './WindowResizer';
 import Redirecter from './Redirecter';
 import CounterPage from '../pages/CounterPage';
+import LoaderPage from '../pages/LoaderPage';
+import PhonesPage from '../pages/PhonesPage';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import DataLoader from '../pages/DataLoader';
 
 /* Single page application */
 
@@ -30,6 +33,9 @@ class App extends Component {
           <Link to='/redirecter'>Go To Redirecter</Link>
           <Link to='/resizer'>Click to go to resizer</Link>
           <Link to='/counter'>Go To Counter</Link>
+          <Link to='/loader'>Go To Loader</Link>
+          <Link to='/phones'>Go To Phones</Link>
+          <Link to='/dataloader'>Go To dataloader</Link>
         </nav>
 
 
@@ -41,6 +47,9 @@ class App extends Component {
           <Route path='/resizer' element={<WindowResizer />} />
           <Route path='/redirecter' element={<Redirecter />} />
           <Route path='/counter' element={<CounterPage />} />
+          <Route path='/loader' element={<LoaderPage />} />
+          <Route path='/phones' element={<PhonesPage />} />
+          <Route path='/dataloader' element={<DataLoader />} />
           <Route path='/*' element={<NotFound />} />
         </Routes>
 

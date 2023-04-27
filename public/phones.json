@@ -1,0 +1,25 @@
+[{
+    "id": 1,
+    "model": "Samsung",
+    "price": 120
+},
+{
+    "id": 2,
+    "model": "Nokia",
+    "price": 1000
+},
+{
+    "id": 3,
+    "model": "Sony",
+    "price": 30
+},
+{
+    "id": 4,
+    "model": "Motorolla",
+    "price": 160
+},
+{
+    "id": 5,
+    "model": "LG",
+    "price": 20
+}]
