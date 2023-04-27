@@ -26,9 +26,19 @@ class Counter extends Component {
         }
     }
 
+    /*  ПЕРЕДЧАСНА ОПТИМІЗАЦІЯ - ЦЕ ЗЛО  */
+
+    shouldComponentUpdate(nextProps, nextState){
+        if(nextProps.step !== this.props.step) {
+            return false
+        }
+        return true
+    }
+
 
     render() {
         const {counter} = this.state;
+        console.log('rerender')
         return (
             <div>
                  <h1>{counter}</h1>
@@ -49,3 +59,39 @@ Counter.defaultProps = {
 Counter.propTypes = {
     step: PropTypes.number
 }
+
+
+/*
+
+const prevState = {
+    value: true
+}
+const nextState = {
+    value: true
+}
+
+---
+
+
+const prevState = {
+    test: {
+        capacity: {
+            volume: 5
+        }
+    }
+}
+
+const nextState = {
+    {
+    test: {
+        capacity: {
+            volume: 5
+        }
+    }
+}
+}
+
+
+{} === {} //false
+
+*/
