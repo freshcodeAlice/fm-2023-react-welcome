@@ -1,7 +1,7 @@
 import React, { Component, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-class Counter extends PureComponent {
+class Counter extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -28,12 +28,17 @@ class Counter extends PureComponent {
 
     /*  ПЕРЕДЧАСНА ОПТИМІЗАЦІЯ - ЦЕ ЗЛО  */
 
-    // shouldComponentUpdate(nextProps, nextState){
-    //     if(nextProps.step !== this.props.step) {
-    //         return false
-    //     }
-    //     return true
-    // }
+    shouldComponentUpdate(nextProps, nextState){
+        if(nextProps.step % 2 === 0) {
+            return false
+        }
+        return true
+    }
+
+/*
+Пропустіть перерендери компоненти, якщо step - парний
+
+*/
 
 
     render() {
