@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Counter extends Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class Counter extends Component {
     increment = () => {
         const {counter} = this.state;
        this.setState({
-        counter: counter + 1
+        counter: counter + this.props.step
        })
     }
 
@@ -20,7 +21,7 @@ class Counter extends Component {
         const {counter} = this.state;
         if (counter > 0) {
             this.setState({
-                counter: counter - 1
+                counter: counter - this.props.step
             })
         }
     }
@@ -40,7 +41,11 @@ class Counter extends Component {
 
 export default Counter;
 
+Counter.defaultProps = {
+    step: 5
+}
 
 
-
-/*  Задачка з *: в компоненті Counter змінити код таким чином, щоб лічильник не опускався нижче 0 */
+Counter.propTypes = {
+    step: PropTypes.number
+}
