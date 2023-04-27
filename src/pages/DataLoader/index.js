@@ -29,10 +29,20 @@ class DataLoader extends Component {
 
                 <DataProvider loadData={() =>
                     fetch('/phones.json')
-                        .then(res => res.json())}
-                    children={() => {
-                        return <h1>PhonesList</h1>
-                    }} />
+                        .then(res => res.json())}>
+                            {({error, isFetching, data}) => {
+                                return (
+                                    <>
+                                    <h1>Phones</h1>
+                                    {error && <div>Ooops</div>}
+                                    {isFetching && <Spinner />}
+                                    <ol>
+                                    {data.map(p => <li key={p.id}>{p.model} - {p.price}</li>)}
+                                    </ol>
+                                    </>
+                                )
+                            }}
+                </DataProvider>
             </div>
         );
     }
