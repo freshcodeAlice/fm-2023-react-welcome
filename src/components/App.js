@@ -3,7 +3,7 @@ import AlohaDashboard from './AlohaDashboard';
 import Timer from './Timer';
 import Spinner from './Spinner';
 import ToDoList from './ToDoList';
-import WindowResizer from './WindowResizer';
+import WindowResizerPage from '../pages/WindowResizerPage';
 import Redirecter from './Redirecter';
 import CounterPage from '../pages/CounterPage';
 import LoaderPage from '../pages/LoaderPage';
@@ -44,7 +44,7 @@ class App extends Component {
           <Route path='/timer' element={<Timer />} />
           <Route path='/spinner' element={<Spinner />} />
           <Route path='/todo' element={<ToDoList />} />
-          <Route path='/resizer' element={<WindowResizer />} />
+          <Route path='/resizer' element={<WindowResizerPage />} />
           <Route path='/redirecter' element={<Redirecter />} />
           <Route path='/counter' element={<CounterPage />} />
           <Route path='/loader' element={<LoaderPage />} />
