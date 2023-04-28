@@ -25,11 +25,17 @@ class App extends Component {
         }
       }
     }
+
+    logOut = () => {
+      this.setState({
+        user: {}
+      })
+    }
     
 
   render() {
     return (
-      <UserContext.Provider value={this.state.user}>
+      <UserContext.Provider value={[this.state.user, this.logOut]}>
         <Tree />
       </UserContext.Provider>
     );
