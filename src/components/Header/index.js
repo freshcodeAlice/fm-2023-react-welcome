@@ -6,34 +6,38 @@ import CONSTANSTS from '../../constants';
 import cx from 'classnames';
 import Switch from '@mui/material/Switch';
 
-const {THEMES} = CONSTANSTS;
+const { THEMES } = CONSTANSTS;
 
-const Header = () => {
-    return (
-        <ThemeContext.Consumer>
-            {([theme, setTheme]) => {
+class Header extends React.Component {
 
-                 const themeToggler = () => {
-                    setTheme(theme === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK)
-                }
 
-                const cn = cx({
-                    [styles.dark]: theme === THEMES.DARK,
-                    [styles.light]: theme === THEMES.LIGHT
-                });
+    themeToggler = () => {
+        const [theme, setTheme] = this.context;
+        setTheme(theme === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK)
+    }
 
-                return (
-                <div className={cn}>
-                    <UserMenu />
-                    <Switch 
-                       checked={theme === THEMES.DARK}
-                       onChange={themeToggler}
-                        />
-                </div>
-                )
-            }}
-        </ThemeContext.Consumer>
-    );
+    render() {
+        const [theme, setTheme] = this.context;
+
+        const cn = cx({
+            [styles.dark]: theme === THEMES.DARK,
+            [styles.light]: theme === THEMES.LIGHT
+        });
+
+        return (
+            <div className={cn}>
+                <UserMenu />
+                <Switch
+                    checked={theme === THEMES.DARK}
+                    onChange={this.themeToggler}
+                />
+            </div>
+        )
+    }
+
 }
+
+
+Header.contextType = ThemeContext;
 
 export default Header;
