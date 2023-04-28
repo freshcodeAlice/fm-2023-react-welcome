@@ -1,6 +1,7 @@
 import React from 'react';
 import UserContext from '../../../../../../contexts/UserContext';
 import ThemeContext from '../../../../../../contexts/ThemeContext';
+import Switch from '@mui/material/Switch';
 import CONSTANSTS from '../../../../../../constants';
 const {THEMES} = CONSTANSTS;
 
@@ -21,7 +22,10 @@ const InnerChild = (props) => {
                     <p>InnerChild</p>
                      { user && <h2>{user.firstName} {user.lastName}</h2>  }
                      <button onClick={logOut}>LogOut</button>
-                     <button onClick={themeToggler}>Change Theme</button>
+                     {/* <button onClick={themeToggler}>Change Theme</button> */}
+                     <Switch
+                        checked={theme === THEMES.DARK}
+                        onChange={themeToggler} />
                     </div>
                     )
                 }}
