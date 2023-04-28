@@ -9,7 +9,7 @@ const InnerChild = (props) => {
                 return (
                 <div style={{border: '2px solid black', padding: '10px'}}>
                 <p>InnerChild</p>
-                 <h2>{user.firstName} {user.lastName}</h2> 
+                 { user && <h2>{user.firstName} {user.lastName}</h2>  }
                  <button onClick={logOut}>LogOut</button>
                 </div>
                 )

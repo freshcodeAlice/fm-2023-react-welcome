@@ -12,6 +12,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import DataLoader from '../pages/DataLoader';
 import Tree from '../components/Tree';
 import UserContext from '../contexts/UserContext';
+import Header from './Header';
 
 class App extends Component {
     constructor(props) {
@@ -28,7 +29,7 @@ class App extends Component {
 
     logOut = () => {
       this.setState({
-        user: {}
+        user: null
       })
     }
     
@@ -36,6 +37,7 @@ class App extends Component {
   render() {
     return (
       <UserContext.Provider value={[this.state.user, this.logOut]}>
+        <Header />
         <Tree />
       </UserContext.Provider>
     );
@@ -51,3 +53,9 @@ function NotFound(props) {
     <h1>Page not found</h1>
   )
 }
+
+
+/*
+Задачка з *: зробити контекст теми і перемикати його кнопкою
+
+*/
