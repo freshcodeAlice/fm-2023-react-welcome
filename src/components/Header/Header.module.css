@@ -1,0 +1,17 @@
+.header {
+    width: 100%; 
+    height: 200px; 
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.light {
+    border: 1px solid black; 
+    background-color: gainsboro;
+    color: black;
+}
+
+.dark {
+    background-color: indigo;
+    color: white;
+}

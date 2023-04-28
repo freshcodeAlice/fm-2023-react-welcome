@@ -1,16 +1,38 @@
 import React from 'react';
 import UserMenu from './UserMenu';
+import styles from './Header.module.css';
+import ThemeContext from '../../contexts/ThemeContext';
+import CONSTANSTS from '../../constants';
+import cx from 'classnames';
+import Switch from '@mui/material/Switch';
+
+const {THEMES} = CONSTANSTS;
 
 const Header = () => {
     return (
-        <div style={{
-            width: '100%', 
-            height: '200px', 
-            border: '1px solid black', 
-            padding: '10px',
-            boxSizing: 'border-box'}}>
-            <UserMenu />
-        </div>
+        <ThemeContext.Consumer>
+            {([theme, setTheme]) => {
+
+                 const themeToggler = () => {
+                    setTheme(theme === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK)
+                }
+
+                const cn = cx({
+                    [styles.dark]: theme === THEMES.DARK,
+                    [styles.light]: theme === THEMES.LIGHT
+                });
+
+                return (
+                <div className={cn}>
+                    <UserMenu />
+                    <Switch 
+                       checked={theme === THEMES.DARK}
+                       onChange={themeToggler}
+                        />
+                </div>
+                )
+            }}
+        </ThemeContext.Consumer>
     );
 }
 
