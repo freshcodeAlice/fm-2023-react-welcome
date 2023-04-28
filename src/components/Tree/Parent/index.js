@@ -3,7 +3,7 @@ import SubParent from './SubParent';
 
 const Parent = (props) => {
     return (
-        <div style={{border: '2px solid black', padding: '10px'}}>
+        <div style={{border: 'inherit', padding: '10px'}}>
            <p>Parent</p>
             <SubParent />
         </div>

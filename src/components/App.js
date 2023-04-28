@@ -12,34 +12,47 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import DataLoader from '../pages/DataLoader';
 import Tree from '../components/Tree';
 import UserContext from '../contexts/UserContext';
+import ThemeContext from '../contexts/ThemeContext';
 import Header from './Header';
+import CONSTANSTS from '../constants';
+const {THEMES} = CONSTANSTS;
 
 class App extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        user: {
-          id: 1,
-          firstName: 'John',
-          lastName: 'Snow',
-          avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/OOjs_UI_icon_userAvatar.svg/1200px-OOjs_UI_icon_userAvatar.svg.png'
-        }
-      }
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {
+        id: 1,
+        firstName: 'John',
+        lastName: 'Snow',
+        avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/OOjs_UI_icon_userAvatar.svg/1200px-OOjs_UI_icon_userAvatar.svg.png'
+      },
+      theme: THEMES.LIGHT
     }
+  }
 
-    logOut = () => {
-      this.setState({
-        user: null
-      })
-    }
-    
+  logOut = () => {
+    this.setState({
+      user: null
+    })
+  }
+
+  changeTheme = (theme) => {
+    this.setState({
+      theme
+    })
+  }
+
 
   render() {
+    const {user, theme} = this.state;
     return (
-      <UserContext.Provider value={[this.state.user, this.logOut]}>
-        <Header />
-        <Tree />
-      </UserContext.Provider>
+      <ThemeContext.Provider value={[theme, this.changeTheme]}>
+        <UserContext.Provider value={[user, this.logOut]}>
+          <Header />
+          <Tree />
+        </UserContext.Provider>
+      </ThemeContext.Provider>
     );
   }
 }

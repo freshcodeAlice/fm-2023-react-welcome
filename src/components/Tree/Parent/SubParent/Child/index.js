@@ -3,7 +3,7 @@ import InnerChild from './InnerChild';
 
 const Child = (props) => {
     return (
-        <div style={{border: '2px solid black', padding: '10px'}}>
+        <div style={{border: 'inherit', padding: '10px'}}>
             <p>Child</p>
             <InnerChild />
         </div>
