@@ -18,7 +18,6 @@ function Header(props) {
         [styles.dark]: props.theme === THEMES.DARK,
         [styles.light]: props.theme === THEMES.LIGHT
     });
-console.log(props);
     return (
         <div className={cn}>
             <UserMenu />

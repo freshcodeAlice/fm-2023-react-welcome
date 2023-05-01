@@ -15,6 +15,7 @@ import UserContext from '../contexts/UserContext';
 import ThemeContext from '../contexts/ThemeContext';
 import Header from './Header';
 import CONSTANSTS from '../constants';
+import SignUpForm from './SignUpForm';
 const {THEMES} = CONSTANSTS;
 
 class App extends Component {
@@ -50,7 +51,7 @@ class App extends Component {
       <ThemeContext.Provider value={[theme, this.changeTheme]}>
         <UserContext.Provider value={[user, this.logOut]}>
           <Header superImportantProp="value-value"/>
-          <Tree />
+          <SignUpForm />
         </UserContext.Provider>
       </ThemeContext.Provider>
     );
