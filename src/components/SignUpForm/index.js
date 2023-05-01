@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './SignForm.module.css';
+import {Formik, Form, Field} from 'formik';
 import * as yup from 'yup';
 
 const signUpSCHEMA = yup.object({
@@ -13,45 +14,56 @@ const signUpSCHEMA = yup.object({
 class SignUpForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
+        
+    }
+
+  
+//     submitHandler = (event) => {
+//         event.preventDefault();
+       
+//         try {
+//  //           const result = signUpSCHEMA.validateSync(this.state);
+//             console.log(result);
+//         } catch (error) {
+//         // this.setState({
+//         //     error
+//         // })
+//         }
+//     }
+
+    render() {
+        const initialValues = {
             firstName: '',
             lastName: '',
             email: '',
-            pass: '',
-            error: null
+            pass: ''
         }
-    }
 
-    changeHadler = ({ target: { value, name } }) => {
-        this.setState({
-            [name]: value
-        })
-    }
-
-    submitHandler = (event) => {
-        event.preventDefault();
-       
-        try {
-            const result = signUpSCHEMA.validateSync(this.state);
-            console.log(result);
-        } catch (error) {
-        this.setState({
-            error
-        })
-        }
-    }
-
-    render() {
-        const { firstName, lastName, email, pass , error} = this.state;
         return (
-            <form className={styles.form} onSubmit={this.submitHandler}>
-                <input type="text" name="firstName" value={firstName} onChange={this.changeHadler} />
-                <input type="text" name="lastName" value={lastName} onChange={this.changeHadler} />
-                <input type="text" name="email" value={email} onChange={this.changeHadler} />
-                <input type="password" name="pass" value={pass} onChange={this.changeHadler} />
-                {error && <p>{error.message}</p>}
-                <button>Submit</button>
-            </form>
+            <Formik 
+            initialValues={initialValues}
+            onSubmit={(values, actions) => {
+                console.log(values);
+                console.log(actions);
+            }}>
+                {(formikProps) => {
+                     console.log(formikProps);
+                    const {values: {firstName, lastName, email, pass }} = formikProps;
+                    return (
+                        // <form className={styles.form} onSubmit={formikProps.handleSubmit}>
+                        <Form className={styles.form}>
+                        {/* <input type="text" name="firstName" value={firstName} onChange={formikProps.handleChange} /> */}
+                        <Field name="firstName" />
+                        <Field name="lastName" />
+                        <Field name="email" />
+                        <Field type="password" name="pass" />
+                        {/* {error && <p>{error.message}</p>} */}
+                        <button>Submit</button>
+                        </Form>
+                    // </form>
+                    )
+                }}
+            </Formik>
         );
     }
 }
