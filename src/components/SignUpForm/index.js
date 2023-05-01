@@ -6,7 +6,7 @@ import * as yup from 'yup';
 const signUpSCHEMA = yup.object({
     firstName: yup.string().min(2, 'FirstName must be more than 2 letter').max(5).required(),
     lastName: yup.string().required(),
-    email: yup.string().required(),
+    email: yup.string().email().required(),
     pass: yup.string().required()
 })
 
