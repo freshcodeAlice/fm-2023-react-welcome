@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './SignForm.module.css';
-import {Formik, Form, Field} from 'formik';
+import { Formik, Form, Field } from 'formik';
 import * as yup from 'yup';
 
 const signUpSCHEMA = yup.object({
@@ -11,61 +11,52 @@ const signUpSCHEMA = yup.object({
 })
 
 
-class SignUpForm extends React.Component {
-    constructor(props) {
-        super(props);
-        
+function SignUpForm(props) {
+
+    const initialValues = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        pass: ''
     }
 
-  
-//     submitHandler = (event) => {
-//         event.preventDefault();
-       
-//         try {
-//  //           const result = signUpSCHEMA.validateSync(this.state);
-//             console.log(result);
-//         } catch (error) {
-//         // this.setState({
-//         //     error
-//         // })
-//         }
-//     }
-
-    render() {
-        const initialValues = {
-            firstName: '',
-            lastName: '',
-            email: '',
-            pass: ''
-        }
-
-        return (
-            <Formik 
+    return (
+        <Formik
             initialValues={initialValues}
             onSubmit={(values, actions) => {
                 console.log(values);
                 console.log(actions);
             }}>
-                {(formikProps) => {
-                     console.log(formikProps);
-                    const {values: {firstName, lastName, email, pass }} = formikProps;
-                    return (
-                        // <form className={styles.form} onSubmit={formikProps.handleSubmit}>
-                        <Form className={styles.form}>
-                        {/* <input type="text" name="firstName" value={firstName} onChange={formikProps.handleChange} /> */}
+            {(formikProps) => {
+                console.log(formikProps);
+                const { values: { firstName, lastName, email, pass } } = formikProps;
+                return (
+                    <Form className={styles.form}>
                         <Field name="firstName" />
                         <Field name="lastName" />
-                        <Field name="email" />
+                        <Field name="email">
+                            {({
+                                field, // { name, value, onChange, onBlur }
+                                form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+                                meta,
+                            }) => (
+                                <div>
+                                    <input type="text" placeholder="Email" {...field} />
+                                    {meta.touched && meta.error && (
+                                        <div className="error">{meta.error}</div>
+                                    )}
+                                </div>
+                            )}
+                        </Field>
                         <Field type="password" name="pass" />
                         {/* {error && <p>{error.message}</p>} */}
                         <button>Submit</button>
-                        </Form>
-                    // </form>
-                    )
-                }}
-            </Formik>
-        );
-    }
+                    </Form>
+
+                )
+            }}
+        </Formik>
+    );
 }
 
 export default SignUpForm;
