@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './SignForm.module.css';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 
 const signUpSCHEMA = yup.object({
@@ -23,6 +23,7 @@ function SignUpForm(props) {
     return (
         <Formik
             initialValues={initialValues}
+            validationSchema={signUpSCHEMA}
             onSubmit={(values, actions) => {
                 console.log(values);
                 console.log(actions);
@@ -33,23 +34,14 @@ function SignUpForm(props) {
                 return (
                     <Form className={styles.form}>
                         <Field name="firstName" />
+                        {/* {formikProps.errors && <p>{formikProps.errors.firstName}</p>} */}
+                        <ErrorMessage name="firstName" component="p" className={styles['error-message']} />
                         <Field name="lastName" />
-                        <Field name="email">
-                            {({
-                                field, // { name, value, onChange, onBlur }
-                                form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-                                meta,
-                            }) => (
-                                <div>
-                                    <input type="text" placeholder="Email" {...field} />
-                                    {meta.touched && meta.error && (
-                                        <div className="error">{meta.error}</div>
-                                    )}
-                                </div>
-                            )}
-                        </Field>
+                        <ErrorMessage name="lastName" />
+                        <Field name="email" />
+                        <ErrorMessage name="email" />
                         <Field type="password" name="pass" />
-                        {/* {error && <p>{error.message}</p>} */}
+                        <ErrorMessage name="pass" />
                         <button>Submit</button>
                     </Form>
 
