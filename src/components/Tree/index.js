@@ -3,30 +3,42 @@ import Parent from './Parent';
 import ThemeContext from '../../contexts/ThemeContext';
 import styles from './Tree.module.css';
 import CONSTANSTS from '../../constants';
+import withTheme from '../../HOCs/withTheme';
 import cx from 'classnames';
 
-const {THEMES} = CONSTANSTS;
+const { THEMES } = CONSTANSTS;
 
 const Tree = (props) => {
+    const cn = cx({
+        [styles.dark]: props.theme === THEMES.DARK,
+        [styles.light]: props.theme === THEMES.LIGHT
+    });
+
     return (
-        <ThemeContext.Consumer>
-            {([theme]) => {
-                const cn = cx({
-                    [styles.dark]: theme === THEMES.DARK,
-                    [styles.light]: theme === THEMES.LIGHT
-                });
-                return (
-                    <div className={cn}>
-                        <p>Tree</p>
-                        <Parent />
-                    </div>
-                )
-            }}
-        </ThemeContext.Consumer>
-    );
+        <div className={cn}>
+            <p>Tree</p>
+            <Parent />
+        </div>
+    )
 }
 
-export default Tree;
+
+// const TreeWithTheme = (props) => {
+//     return (
+//     <ThemeContext.Consumer>
+//         {([theme, setTheme]) => {
+//             return <Tree theme={theme} setTheme={setTheme}/>
+//         }}
+//     </ThemeContext.Consumer>
+//     )
+// }
+
+
+
+
+    const TreeWithTheme = withTheme(Tree);
+
+export default TreeWithTheme;
 
 
 /*

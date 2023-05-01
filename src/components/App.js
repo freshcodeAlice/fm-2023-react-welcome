@@ -49,7 +49,7 @@ class App extends Component {
     return (
       <ThemeContext.Provider value={[theme, this.changeTheme]}>
         <UserContext.Provider value={[user, this.logOut]}>
-          <Header />
+          <Header superImportantProp="value-value"/>
           <Tree />
         </UserContext.Provider>
       </ThemeContext.Provider>
