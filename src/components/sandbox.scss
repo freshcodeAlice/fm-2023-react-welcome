@@ -1,0 +1,116 @@
+$main-color: blue;
+$secondary-color: red;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+$xxl: 1400px;
+
+p {
+  color: $main-color;
+  font: {
+      weight: 400;
+      family: Arial;
+      style: italic;
+      size: 20px;
+  };
+  border: {
+     top: {
+         width: 2px;
+         style: solid;
+         color: red;
+     };
+     bottom: {
+          width: 3px;
+         style: solid;
+         color: blue;
+     };
+  };
+}
+
+%flex-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.wrapper {
+   @extend %flex-container;
+    align-items: center;
+    width: 300px;
+}
+
+
+.form-container {
+    @extend %flex-container;
+}
+
+
+
+// .flex-wrapper {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: center;
+//     align-items: flex-start;
+// }
+
+
+// .flex-column {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: flex-start;
+//     align-items: stretch;
+// }
+
+
+@mixin flex($fd, $jc, $ai) {
+    display: flex;
+    flex-direction: $fd;
+    justify-content: $jc;
+    align-items: $ai;
+}
+
+
+
+.flex-wrapper {
+    @include flex(row, center, flex-start)
+}
+
+.flex-column {
+    @include flex(column, flex-start, stretch)
+}
+
+
+
+
+.container {
+    width: 200px;
+    height: 300px;
+    
+    
+    > article {
+        display: flex;
+    }
+    
+    
+    + p {
+        color: yellow;
+    }
+    
+    
+    &:hover {
+        background-color: violet;
+    }
+    
+    
+    @media screen and (min-width: $sm) {
+        width: 200px;
+        
+        
+        article {
+            color: red;
+        }
+    }
+}
+
+

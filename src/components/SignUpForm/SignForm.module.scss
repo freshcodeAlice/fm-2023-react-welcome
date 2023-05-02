@@ -1,0 +1,23 @@
+@mixin flex($fd, $jc) {
+    display: flex;
+    flex-direction: $fd;
+    justify-content: $jc;
+}
+
+.form {
+    width: 200px;
+    @include flex(row, center);
+    padding: 20px;
+    border: 1px solid grey;
+
+
+    * {
+        margin-top: 10px;
+    }
+
+
+    .error-message {
+        color: red;
+    }
+}
+

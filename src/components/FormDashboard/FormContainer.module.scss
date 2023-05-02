@@ -1,0 +1,22 @@
+.wrapper {
+    width: 200px;
+    padding: 10%;
+    text-align: center;
+    border: {
+        top: {
+            width: 1px;
+            style: solid;
+            color: blue;
+        }
+    }
+
+    form {
+        background-color: bisque;
+        display: flex;
+        flex-direction: column;
+
+        * {
+            margin-top: 10px;
+        }
+    }
+}

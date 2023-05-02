@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './SignForm.module.css';
+import styles from './SignForm.module.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 

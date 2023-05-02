@@ -1,5 +1,14 @@
+:root {
+    --main-color: blue;
+}
+
+
 .container {
     width: 400px;
     border: 2px solid pink;
     background-color: blueviolet;
+}
+
+.container > article {
+    display: flex;
 }

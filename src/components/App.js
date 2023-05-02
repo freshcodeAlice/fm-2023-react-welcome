@@ -16,6 +16,7 @@ import ThemeContext from '../contexts/ThemeContext';
 import Header from './Header';
 import CONSTANSTS from '../constants';
 import SignUpForm from './SignUpForm';
+import FormContainer from './FormDashboard';
 const {THEMES} = CONSTANSTS;
 
 class App extends Component {
@@ -48,12 +49,7 @@ class App extends Component {
   render() {
     const {user, theme} = this.state;
     return (
-      <ThemeContext.Provider value={[theme, this.changeTheme]}>
-        <UserContext.Provider value={[user, this.logOut]}>
-          <Header superImportantProp="value-value"/>
-          <SignUpForm />
-        </UserContext.Provider>
-      </ThemeContext.Provider>
+      <FormContainer />
     );
   }
 }
