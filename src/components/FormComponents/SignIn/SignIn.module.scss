@@ -1,0 +1,39 @@
+%text-style {
+    font: {
+        size: 0.8em;
+        weight: bolder;
+    }
+}
+
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    padding: 8%;
+    background-color: white;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(140,140,140,1);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(140,140,140,1);
+    box-shadow: 0px 0px 10px 0px rgba(140,140,140,1);
+
+    label {
+        @extend %text-style;
+        margin-top: 15px;
+        margin-bottom: 2px;
+    }
+
+   
+  
+
+    button {
+    background: rgb(156,164,238);
+    background: linear-gradient(90deg, rgba(156,164,238,1) 0%, rgba(77,84,208,1) 100%);
+    @extend %text-style;
+    padding: 0.7em;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    margin: 20px 0;
+    }
+}

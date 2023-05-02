@@ -1,0 +1,29 @@
+%text-style {
+    font: {
+        size: 0.8em;
+        weight: bolder;
+    }
+}
+
+.input {
+    // height: 2.5em;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding: 1em;
+}
+
+.input:focus {
+    outline: none;
+    border: 1px solid grey;
+}
+
+.invalid {
+    border: 1px solid red;
+}
+
+.error-message {
+    @extend %text-style;
+    color: red;
+    margin: 0;
+    margin-top: 2px;
+}

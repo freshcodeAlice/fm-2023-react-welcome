@@ -17,6 +17,7 @@ import Header from './Header';
 import CONSTANSTS from '../constants';
 import SignUpForm from './SignUpForm';
 import FormContainer from './FormDashboard';
+import FormPage from '../pages/FormPage';
 const {THEMES} = CONSTANSTS;
 
 class App extends Component {
@@ -49,7 +50,7 @@ class App extends Component {
   render() {
     const {user, theme} = this.state;
     return (
-      <FormContainer />
+     <FormPage />
     );
   }
 }
