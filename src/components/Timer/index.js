@@ -6,6 +6,7 @@ function Timer (props) {
     const [isRunning, setRunning] = useState(true);
 
     useEffect(() => {
+        console.log('useEffect')
         if(isRunning) {
             const id = setTimeout(() => {
                 setTime(time => addSeconds(time, 1))
@@ -14,7 +15,7 @@ function Timer (props) {
                 clearTimeout(id);
             }
         }
-    })
+    }, [time, isRunning])
 
       
 
