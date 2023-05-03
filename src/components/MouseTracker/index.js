@@ -1,37 +1,31 @@
 import React, {useState, useEffect} from 'react';
 
 const MouseTracker = () => {
-    const [coordinates, setCoordinates] = useState({
-        x: 0,
-        y: 0,
-    });
+
     const [count, setCount] = useState(0);
 
     useEffect(()=>{
-        document.addEventListener('click', mouseHandler); /// Побочний ефект 
+        console.log('counterHandler was re-created');
+        const counterHandler = (event) => {
+            console.log('counter handler is here!')
+          setCount((prevCount) => prevCount+1)  
+        } 
+        document.addEventListener('click', counterHandler); /// Побочний ефект 
         console.log('event listener added');
         return () => {
             console.log('clear effect');
-            document.removeEventListener('click', mouseHandler);
+            document.removeEventListener('click', counterHandler);
         }
-    });
+    },[]);
+
+    //useEffect();  // Не пхати всю роботу в один useEffect!
 
 
-    const mouseHandler = (event) => {
-        setCoordinates({
-            x: event.clientX,
-            y: event.clientY
-        })
-    }
 
-    const counterHandler = (event) => {
-      setCount(count+1)
-    } 
   
     return (
         <>
-            <h1>x: {coordinates.x}</h1>
-            <h1>y: {coordinates.y}</h1>
+        
             <h2>count: {count}</h2>
         </>
     );
