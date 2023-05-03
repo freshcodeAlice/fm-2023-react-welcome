@@ -1,74 +1,44 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect} from 'react';
 import {format, addSeconds} from 'date-fns';
 
-class Timer extends Component {
-   constructor(props){
-    super(props);
-    this.state = {
-        time: new Date(0,0,0,0,0,0)
-    }
-    this.intervalId = null;
-   }
+function Timer (props) {
+     const [time, setTime] = useState(new Date(0,0,0,0,0,0));
+    const [isRunning, setRunning] = useState(true);
 
-   componentDidMount() {
-    this.start();
-   }
+    useEffect(() => {
+        if(isRunning) {
+            const id = setTimeout(() => {
+                setTime(time => addSeconds(time, 1))
+            }, 1000);
+            return () =>{
+                clearTimeout(id);
+            }
+        }
+    })
 
+      
 
-   start = () => {
-    console.log('timer started');
-    if(!this.intervalId){
-        this.intervalId = setInterval(()=>{
-            // this.setState({
-            //     count: this.state.count + 1
-            // })
-
-            this.setState((state) => ({time: addSeconds(state.time, 1)}))
-
-            /*
-            Робота з нативною датою:
-            1. Перегнати дату в таймштемп
-            2. Додати потрібну кількість мілісекунд
-            3. Перегнати це назад і оновити стан
-            4. 
-
-            */
-        }, 1000);
-    }
-   }
-
-
-   stop = () => {
-    console.log('timer stops');
-    clearInterval(this.intervalId);
-    this.intervalId = null;
-   }
-   
-   componentWillUnmount() {
-    this.stop();
-   }
-   
-
-   clear = () => {
-        this.setState({
-            time: new Date(0,0,0,0,0,0)
-        })
+   const clear = () => {
+    setTime(new Date(0,0,0,0,0,0))
    } 
    
-    render() {
-        const {time} = this.state;
+    const toggleTimer = () => {
+        setRunning(!isRunning)
+    }
+ 
         return (
             <>
             <h1>
                 {format(time, 'HH:mm:ss')}
             </h1>
-                <button onClick={this.start}>start</button>
-                <button onClick={this.stop}>stop </button>
-                <button onClick={this.clear}>clear</button>
+                 {/* <button onClick={start}>start</button>
+                <button onClick={stop}>stop </button> */}
+                <button onClick={toggleTimer}>{isRunning ? "Stop" : "Start"}</button>
+                <button onClick={clear}>clear</button> 
             </>
         );
     }
-}
+
 
 export default Timer;
 

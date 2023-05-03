@@ -52,7 +52,7 @@ class App extends Component {
   render() {
     const {user, theme} = this.state;
     return (
-     <MouseTracker />
+    <Timer />
     );
   }
 }
