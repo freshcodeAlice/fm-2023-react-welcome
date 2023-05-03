@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 const MouseTracker = () => {
     const [coordinates, setCoordinates] = useState({
@@ -6,6 +6,16 @@ const MouseTracker = () => {
         y: 0,
     });
     const [count, setCount] = useState(0);
+
+    useEffect(()=>{
+        document.addEventListener('click', mouseHandler); /// Побочний ефект 
+        console.log('event listener added');
+        return () => {
+            console.log('clear effect');
+            document.removeEventListener('click', mouseHandler);
+        }
+    });
+
 
     const mouseHandler = (event) => {
         setCoordinates({
@@ -17,21 +27,24 @@ const MouseTracker = () => {
     const counterHandler = (event) => {
       setCount(count+1)
     } 
-
+  
     return (
-        <div 
-        style={{width: '200px', height: '200px', backgroundColor: 'pink'}}
-        onMouseMove={mouseHandler}
-        onClick={counterHandler}>
+        <>
             <h1>x: {coordinates.x}</h1>
             <h1>y: {coordinates.y}</h1>
             <h2>count: {count}</h2>
-        </div>
+        </>
     );
 }
 
 export default MouseTracker;
 
+
+  // <div 
+        // style={{width: '200px', height: '200px', backgroundColor: 'pink'}}
+        // onMouseMove={mouseHandler}
+        // onClick={counterHandler}>
+        // </div>
 
 /*
 this.setState і setState від хука useState працюють з невеликою, але важливою різницею.

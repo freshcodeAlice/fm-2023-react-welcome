@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect} from 'react';
 
 
 /*
@@ -13,33 +13,54 @@ y: ....px
 
 */
 
-class WindowResizer extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            x: window.innerWidth,
-            y: window.innerHeight
-        }
-    }
+function WindowResizer (props) {
+    const [sizes, setSizes] = useState(
+        {x: window.innerWidth,
+        y: window.innerHeight});
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         x: window.innerWidth,
+    //         y: window.innerHeight
+    //     }
+    // }
 
-    componentDidMount() {
-        window.addEventListener('resize', this.handleResize)
-    }
+    // componentDidMount() {
+    //     window.addEventListener('resize', this.handleResize)
+    // }
+
+    useEffect(()=> {
+        window.addEventListener('resize', handleResize)
+        return () =>{
+            window.removeEventListener('resize', this.handleResize)
+        }
+    })
 
     handleResize = () => {
-        this.setState({
-            x: window.innerWidth,
-            y: window.innerHeight
+        // this.setState({
+        //     x: window.innerWidth,
+        //     y: window.innerHeight
+        // })
+        setSizes({
+         x: window.innerWidth,
+           y: window.innerHeight
         })
     }
 
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.handleResize)
-    }
+    // componentWillUnmount() {
+    //     window.removeEventListener('resize', this.handleResize)
+    // }
     
-    render() {
-        return this.props.children(this.state);
-    }
+ //   render() {
+        // return this.props.children(this.state);
+ //   }
+
+ return (
+    <>
+    <h1>x: {}</h1>
+    <h1>y: {}</h1>
+    </>
+ )
 }
 
 export default WindowResizer;
