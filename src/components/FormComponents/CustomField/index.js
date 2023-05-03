@@ -9,6 +9,7 @@ const CustomField = (props) => {
         <>
         <Field {...props}>
             {({field, form, meta}) => {
+
                 const cn = cx(styles.input, {
                     [styles.invalid]: meta.touched && meta.error
 
