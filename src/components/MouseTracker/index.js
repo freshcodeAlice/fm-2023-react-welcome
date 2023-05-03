@@ -4,22 +4,18 @@ const MouseTracker = () => {
     const [coordinates, setCoordinates] = useState({
         x: 0,
         y: 0,
-        count: 0
-    })
+    });
+    const [count, setCount] = useState(0);
 
     const mouseHandler = (event) => {
         setCoordinates({
-            ...coordinates,
             x: event.clientX,
             y: event.clientY
         })
     }
 
     const counterHandler = (event) => {
-        setCoordinates({
-            ...coordinates,
-            count: coordinates.count+1
-        })
+      setCount(count+1)
     } 
 
     return (
@@ -29,7 +25,7 @@ const MouseTracker = () => {
         onClick={counterHandler}>
             <h1>x: {coordinates.x}</h1>
             <h1>y: {coordinates.y}</h1>
-            <h2>count: {coordinates.count}</h2>
+            <h2>count: {count}</h2>
         </div>
     );
 }
