@@ -6,7 +6,6 @@ const Sandbox = (props) => {
     const [count, setCount] = useState(0);
 
     const clickHandler = () => {
-        // count++;
         setCount(count => count+1); // ASYNC WORK
         console.log(count);
     }

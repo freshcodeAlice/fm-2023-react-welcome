@@ -19,6 +19,7 @@ import SignUpForm from './SignUpForm';
 import FormContainer from './FormDashboard';
 import FormPage from '../pages/FormPage';
 import Sandbox from './Sandbox/index.js';
+import MouseTracker from './MouseTracker';
 const {THEMES} = CONSTANSTS;
 
 class App extends Component {
@@ -51,7 +52,7 @@ class App extends Component {
   render() {
     const {user, theme} = this.state;
     return (
-     <Sandbox />
+     <MouseTracker />
     );
   }
 }
