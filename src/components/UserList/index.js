@@ -1,64 +1,48 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Spinner from '../Spinner';
 import styles from './UserList.module.css';
+import { getUsers } from '../../api/getUsers';
 
-const API_BASE = 'https://randomuser.me/api/?results=50';
+function UserList(props) {
+    const [users, setUsers] = useState([]);
+    const [error, setError] = useState(null);
+    const [isFetching, setFetching] = useState(true);
 
-class UserList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            users: [],
-            error: null,
-            isFetching: true
-        }
-    }
-
-    componentDidMount = () => {
-
-        fetch(API_BASE)
-            .then(res => res.json())
+    useEffect(() => {
+        getUsers()
             .then(data => {
-                console.log(data);
-                this.setState({
-                    users: data.results
-                })
+                setUsers(data.results)
             })
             .catch(error => {
-                this.setState({
-                    error
-                })
+                setError(error)
             })
             .finally(() => {
-                this.setState({
-                    isFetching: false
-                })
+                setFetching(false)
             })
-    }
+    }, [])
 
 
-    render() {
-        const { users, error, isFetching } = this.state;
-        const usersMap = users.map(
-            ({ name: { first, last }, email, login: { uuid }, picture: {large} }) =>
-                <li key={uuid} className={styles.usercard}>
-                    <img src={large} />
-                    <h3>{email} </h3> 
-                    <p>{first} {last}</p>
-                    </li>)
-        return (
-            <>
-                <h1>
-                    Users List
-                </h1>
-                {isFetching && <Spinner />}
-                {error && <div>Ooops, something goes wrong</div>}
-                <ul className={styles.wrapper}>
-                    {usersMap}
-                </ul>
-            </>
-        );
-    }
+
+
+    const usersMap = users.map(
+        ({ name: { first, last }, email, login: { uuid }, picture: { large } }) =>
+            <li key={uuid} className={styles.usercard}>
+                <img src={large} />
+                <h3>{email} </h3>
+                <p>{first} {last}</p>
+            </li>)
+    return (
+        <>
+            <h1>
+                Users List
+            </h1>
+            {isFetching && <Spinner />}
+            {error && <div>Ooops, something goes wrong</div>}
+            <ul className={styles.wrapper}>
+                {usersMap}
+            </ul>
+        </>
+    );
 }
 
 export default UserList;
