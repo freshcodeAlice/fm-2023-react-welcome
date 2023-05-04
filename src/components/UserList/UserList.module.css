@@ -1,0 +1,19 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+.usercard {
+    list-style-type: none;
+    width: 230px;
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin: 10px;
+    font-size: 0.8em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
