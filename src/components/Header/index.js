@@ -23,7 +23,7 @@ function Header(props) {
     });
     return (
         <div className={cn}>
-            <UserMenu />
+            <UserMenu callback={themeToggler}/>
             <Switch
                 checked={theme === THEMES.DARK}
                 onChange={themeToggler}

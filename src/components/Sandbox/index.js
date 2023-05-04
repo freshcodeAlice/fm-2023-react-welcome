@@ -1,18 +1,34 @@
-import React, {useState} from 'react';
+import ThemeContext from '../../contexts/ThemeContext';
+import React, { useCallback, useState, useEffect, useContext } from 'react';
 
-// let count = 0;
+
 
 const Sandbox = (props) => {
-    const [count, setCount] = useState(0);
+    const [theme, setTheme] = useContext(ThemeContext);
+    const [inputValue, setInput] = useState('1');
 
-    const clickHandler = () => {
-        setCount(count => count+1); // ASYNC WORK
-        console.log(count);
+    const changeHandler = ({ target: { value } }) => {
+        setInput(value)
     }
+    const logValue = useCallback(() => {
+        console.log(inputValue);
+    }, [inputValue]);
+
+    useEffect(() => {
+        console.log('logValue re-created')
+       
+    }, [logValue]);
+
+    //   console.log('logValue changed')
+
+
+
+
     return (
         <div>
-            {count}
-            <button onClick={clickHandler}>Increment</button>
+            <input type="text" value={inputValue} onChange={changeHandler} />
+            <button onClick={logValue}>Log value</button>
+            <p>{theme}</p>
         </div>
     );
 }

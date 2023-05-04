@@ -55,7 +55,7 @@ class App extends Component {
       <UserContext.Provider value={[user, this.logOut]}>
         <ThemeContext.Provider value={[theme, this.changeTheme]} >
           <Header />
-          <Tree />
+          <Sandbox />
         </ThemeContext.Provider>
       </UserContext.Provider>
 

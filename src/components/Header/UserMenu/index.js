@@ -4,6 +4,7 @@ import withUser from '../../../HOCs/withUser';
 
 const UserMenu = (props) => {
     const [user, setUser] = useContext(UserContext);
+    console.log('UserMenu rerender')
     return (
         <div>
             {user && <img src={user.avatar} style={{ width: '50px', height: '50px', borderRadius: '50%' }} />}
