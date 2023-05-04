@@ -1,23 +1,26 @@
 import ThemeContext from '../../contexts/ThemeContext';
 import React, { useCallback, useState, useEffect, useContext } from 'react';
 
-
-
 const Sandbox = (props) => {
     const [theme, setTheme] = useContext(ThemeContext);
     const [inputValue, setInput] = useState('1');
 
-    const changeHandler = ({ target: { value } }) => {
-        setInput(value)
-    }
+    // const changeHandler = ({ target: { value } }) => {
+    //     setInput(value)
+    // }
+
+    const changeHandler = useCallback(({ target: { value } }) => {
+         setInput(value)
+     }, []);
+
     const logValue = useCallback(() => {
         console.log(inputValue);
     }, [inputValue]);
 
     useEffect(() => {
-        console.log('logValue re-created')
+        console.log('changeHandler re-created')
        
-    }, [logValue]);
+    }, [changeHandler]);
 
     //   console.log('logValue changed')
 
