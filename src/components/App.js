@@ -20,7 +20,7 @@ import FormContainer from './FormDashboard';
 import FormPage from '../pages/FormPage';
 import Sandbox from './Sandbox/index.js';
 import MouseTracker from './MouseTracker';
-const {THEMES} = CONSTANSTS;
+const { THEMES } = CONSTANSTS;
 
 class App extends Component {
   constructor(props) {
@@ -50,9 +50,12 @@ class App extends Component {
 
 
   render() {
-    const {user, theme} = this.state;
+    const { user, theme } = this.state;
     return (
-    <Timer />
+      <ThemeContext.Provider value={[theme, this.changeTheme]} >
+        <Tree />
+      </ThemeContext.Provider>
+
     );
   }
 }

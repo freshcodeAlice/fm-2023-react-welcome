@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import Parent from './Parent';
 import ThemeContext from '../../contexts/ThemeContext';
 import styles from './Tree.module.css';
@@ -9,9 +9,11 @@ import cx from 'classnames';
 const { THEMES } = CONSTANSTS;
 
 const Tree = (props) => {
+    const [theme, setTheme] = useContext(ThemeContext);
+
     const cn = cx({
-        [styles.dark]: props.theme === THEMES.DARK,
-        [styles.light]: props.theme === THEMES.LIGHT
+        [styles.dark]: theme === THEMES.DARK,
+        [styles.light]: theme === THEMES.LIGHT
     });
 
     return (
@@ -20,33 +22,7 @@ const Tree = (props) => {
             <Parent />
         </div>
     )
+
 }
 
-
-// const TreeWithTheme = (props) => {
-//     return (
-//     <ThemeContext.Consumer>
-//         {([theme, setTheme]) => {
-//             return <Tree theme={theme} setTheme={setTheme}/>
-//         }}
-//     </ThemeContext.Consumer>
-//     )
-// }
-
-
-
-
-    const TreeWithTheme = withTheme(Tree);
-
-export default TreeWithTheme;
-
-
-/*
-Робота з контекстом
-
-+1. Створити об'єкт контексту
-+2. Надати (provide) значення контексту тій частині дерева компонент, яка від цих даних залежить
-+3. Підключити компоненту, яка використовує дані, до контексту
-
-
-*/
+export default Tree;

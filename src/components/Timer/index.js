@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react';
 import {format, addSeconds} from 'date-fns';
 
 function Timer (props) {
-     const [time, setTime] = useState(new Date(0,0,0,0,0,0));
+    const [time, setTime] = useState(new Date(0,0,0,0,0,0));
     const [isRunning, setRunning] = useState(true);
 
     useEffect(() => {
@@ -17,7 +17,6 @@ function Timer (props) {
         }
     }, [time, isRunning])
 
-      
 
    const clear = () => {
     setTime(new Date(0,0,0,0,0,0))
