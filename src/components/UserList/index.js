@@ -7,9 +7,10 @@ function UserList(props) {
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const [isFetching, setFetching] = useState(true);
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
-        getUsers()
+        getUsers(page)
             .then(data => {
                 setUsers(data.results)
             })
@@ -19,9 +20,15 @@ function UserList(props) {
             .finally(() => {
                 setFetching(false)
             })
-    }, [])
+    }, [page])
 
+    const incrementPage = () => {
+        setPage(page+1)
+    }
 
+    const decrementPage = () => {
+        setPage(page-1)
+    }
 
 
     const usersMap = users.map(
@@ -38,6 +45,8 @@ function UserList(props) {
             </h1>
             {isFetching && <Spinner />}
             {error && <div>Ooops, something goes wrong</div>}
+            <button onClick={decrementPage}>Prev</button>
+            <button onClick={incrementPage}>Next</button>
             <ul className={styles.wrapper}>
                 {usersMap}
             </ul>
