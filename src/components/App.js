@@ -52,9 +52,12 @@ class App extends Component {
   render() {
     const { user, theme } = this.state;
     return (
-      <ThemeContext.Provider value={[theme, this.changeTheme]} >
-        <Tree />
-      </ThemeContext.Provider>
+      <UserContext.Provider value={[user, this.logOut]}>
+        <ThemeContext.Provider value={[theme, this.changeTheme]} >
+          <Header />
+          <Tree />
+        </ThemeContext.Provider>
+      </UserContext.Provider>
 
     );
   }

@@ -5,7 +5,7 @@ const Child = (props) => {
     return (
         <div style={{border: 'inherit', padding: '10px'}}>
             <p>Child</p>
-            {/* <InnerChild /> */}
+            <InnerChild />
         </div>
     );
 }

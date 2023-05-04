@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import UserContext from '../../../../../../contexts/UserContext';
 import ThemeContext from '../../../../../../contexts/ThemeContext';
 import Switch from '@mui/material/Switch';
@@ -9,7 +9,9 @@ import withUser from '../../../../../../HOCs/withUser';
 const { THEMES } = CONSTANSTS;
 
 const InnerChild = (props) => {
-     const {user, theme, setTheme, setUser}= props;
+    const [theme, setTheme] = useContext(ThemeContext);
+    const [user, setUser] = useContext(UserContext);
+
     const themeToggler = () => {
         setTheme(theme === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK)
     }
@@ -28,4 +30,4 @@ const InnerChild = (props) => {
 }
 
 
-export default withUser(withTheme(InnerChild));
+export default InnerChild;

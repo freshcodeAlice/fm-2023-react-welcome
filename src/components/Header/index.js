@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import UserMenu from './UserMenu';
 import styles from './Header.module.css';
 import ThemeContext from '../../contexts/ThemeContext';
@@ -10,19 +10,22 @@ import withTheme from '../../HOCs/withTheme';
 const { THEMES } = CONSTANSTS;
 
 function Header(props) {
+    const [theme, setTheme] = useContext(ThemeContext);
+
+
     const themeToggler = () => {
-        props.setTheme(props.theme === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK)
+        setTheme(theme === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK)
     }
 
     const cn = cx({
-        [styles.dark]: props.theme === THEMES.DARK,
-        [styles.light]: props.theme === THEMES.LIGHT
+        [styles.dark]: theme === THEMES.DARK,
+        [styles.light]: theme === THEMES.LIGHT
     });
     return (
         <div className={cn}>
             <UserMenu />
             <Switch
-                checked={props.theme === THEMES.DARK}
+                checked={theme === THEMES.DARK}
                 onChange={themeToggler}
             />
         </div>
@@ -40,9 +43,5 @@ function Header(props) {
 //     )
 // }
 
-const HeaderWithTheme = withTheme(Header);
 
-
-
-
-export default HeaderWithTheme;
+export default Header;
