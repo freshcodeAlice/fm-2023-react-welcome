@@ -1,42 +1,15 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Spinner from '../Spinner';
+import useData from '../../hooks/useData';
+/*
+Користувацький хук — це JavaScript-функція, ім’я якої починається з ”use”, і яка може викликати інші хуки */
 
-class UserLoader extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: [],
-            isFetching: true,
-            error: null
-        }
-    }
-    
-    componentDidMount() {
-        fetch('/users.json')
-        .then(res => res.json())
-        .then(data => {
-            this.setState({
-                data
-            })
-        })
-        .catch((error) => {
-            this.setState({
-                error
-            })
-        })
-        .finally(() => {
-            this.setState({
-                isFetching: false
-            })
-        })
-    }
+function UserLoader (props) {
+    const {data, isFetching, error} = useData(() => fetch('/users.json').then(res => res.json())
+    );
+        
 
-
-
-
-    render() {
-        const {data, isFetching, error} = this.state;
-        return (
+ return( 
             <div>
                 {isFetching && <Spinner />}
                 {error && <div> OOOPS </div>}
@@ -45,7 +18,7 @@ class UserLoader extends Component {
                 </ul> 
             </div>
         );
-    }
+  
 }
 
 export default UserLoader;
