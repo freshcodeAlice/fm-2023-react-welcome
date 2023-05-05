@@ -1,4 +1,5 @@
-import React, {useState, useReducer} from 'react';
+import React, { useState, useReducer } from 'react';
+import Spinner from '../Spinner';
 
 
 /* Редьюсер - ЧИСТА ФУНКЦІЯ
@@ -9,47 +10,28 @@ import React, {useState, useReducer} from 'react';
 */
 
 function reducer(state, action) {
-  switch(action.type) {
-    case 'firstName': {
-        return {
-            ...state,
-            firstName: action.value
+    switch (action.type) {
+        case 'firstName':
+        case 'lastName':
+        case 'email':
+        case 'password':
+        case 'birthday':
+        case 'gender': {
+            return {
+                ...state,
+                [action.type]: action.value
+            }
         }
-    }
-    case 'lastName': {
-        return {
-            ...state, 
-            lastName: action.value
+        case 'FORM SUBMITTED': {
+            return {
+                ...state,
+                 isFetching: true
+            }
         }
+        default:
+            return state;
     }
-    case 'email': {
-        return {
-            ...state, 
-            email: action.value
-        }
-    }
-    case 'password': {
-        return {
-            ...state, 
-            password: action.value
-        }
-    }
-    case 'birthday': {
-        return {
-            ...state, 
-            birthday: action.value
-        }
-    }
-    case 'gender': {
-        return {
-            ...state, 
-            gender: action.value
-        }
-    }
-    default: 
-    return state;
-  }
-   
+
 
     // Повертає новий об'єкт стану
 }
@@ -61,11 +43,12 @@ const Index = () => {
         email: '',
         password: '',
         birthday: '',
-        gender: ''
+        gender: '',
+        isFetching: false
     });
 
 
-    const changeHandler = ({target: {name, value}}) => {
+    const changeHandler = ({ target: { name, value } }) => {
         const action = {
             type: name,
             value
@@ -73,58 +56,29 @@ const Index = () => {
         dispatch(action);
     }
 
-    // const changeHandler = ({target: {name, value}}) => {
-    //    switch(name) {
-    //     case 'firstName': {
-    //         setFirstName(value);
-    //         break;
-    //     }
-    //     case 'lastName': {
-    //         setLastName(value);
-    //         break;
-    //     }
-    //     case 'email': {
-    //         setEmail(value);
-    //         break;
-    //     }
-    //     case 'password': {
-    //         setPassword(value);
-    //         break;
-    //     }
-    //     case 'birthday': {
-    //         setBirthday(value);
-    //         break;
-    //     }
-    //     case 'gender': {
-    //         setGender(value);
-    //     }
-    //    }
-    // }
+    const submitHandler = (event) => {
+        event.preventDefault();
+        dispatch({
+            type: 'FORM SUBMITTED'
+        })
+    }
 
-    // const submitHandler = (event) => {
-    //     event.preventDefault();
-    //     console.log({
-    //         firstName,
-    //         lastName,
-    //         email,
-    //         password,
-    //         gender
-    //     })
-    // }
 
-   const {firstName, lastName, email, password, birthday} = state;
+
+    const { firstName, lastName, email, password, birthday, isFetching } = state;
     return (
         <form>
-            <input name="firstName" value={firstName} onChange={changeHandler}/>
-            <input name="lastName" value={lastName} onChange={changeHandler}/>
-            <input name="email" value={email} onChange={changeHandler}/>
-            <input name="password" type="password" value={password} onChange={changeHandler}/>
-            <input name="birthday" value={birthday} onChange={changeHandler}/>
+            {isFetching && <Spinner />}
+            <input name="firstName" value={firstName} onChange={changeHandler} />
+            <input name="lastName" value={lastName} onChange={changeHandler} />
+            <input name="email" value={email} onChange={changeHandler} />
+            <input name="password" type="password" value={password} onChange={changeHandler} />
+            <input name="birthday" value={birthday} onChange={changeHandler} />
             <p>Gender</p>
-           <label><input name="gender" type="radio" onChange={changeHandler} value="Male"/>Male</label> 
-           <label><input name="gender" type="radio" onChange={changeHandler} value="Female" />Female</label> 
-           <label><input name="gender" type="radio" onChange={changeHandler} value="Non-binary"/>Non-binary</label>  
-            <button >Submit</button>
+            <label><input name="gender" type="radio" onChange={changeHandler} value="Male" />Male</label>
+            <label><input name="gender" type="radio" onChange={changeHandler} value="Female" />Female</label>
+            <label><input name="gender" type="radio" onChange={changeHandler} value="Non-binary" />Non-binary</label>
+            <button onClick={submitHandler}>Submit</button>
         </form>
     );
 }
