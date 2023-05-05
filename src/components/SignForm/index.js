@@ -1,15 +1,9 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import Spinner from '../Spinner';
 import {format} from 'date-fns';
-
-
-/* Редьюсер - ЧИСТА ФУНКЦІЯ
-1. Детермінована - за одних і тих вхідних даних має повертати одне і те саме значення
-(РЕДЬЮСЕР НІКОЛИ НЕ МУТУЄ ОБ'ЄКТ СТАНУ)
-2. Без побічних ефектів  
-(НІКОЛИ НЕ РОБИМО ЗАПИТІВ НА СЕРВЕР)
-*/
-
+import { initialState, reducer } from '../../reducers/form_reducer';
+import CONSTANSTS from '../../constants';
+const {ACTIONTYPES} = CONSTANSTS;
 
 /*
 Зробити компоненту з 5 інпутами, 
@@ -18,66 +12,8 @@ import {format} from 'date-fns';
 кнопкою, яка підвантажує дані з json-файлика
 
 */
-const initialState = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    birthday: new Date(),
-    isFetching: false,
-    error: null
-}
 
 
-function reducer(state, action) {
-    switch (action.type) {
-        case 'firstName':
-        case 'lastName':
-        case 'email':
-        case 'password': {
-            return {
-                ...state,
-                [action.type]: action.value
-            }
-        }
-        case 'birthday':{
-            return {
-                ...state,
-                birthday: new Date(action.value)
-            }
-        }
-        case 'RESET_FORM': {
-            return {...initialState}
-        }
-        case 'AUTOCOMPLETE_REQUEST' : {
-            return {
-                ...state,
-                isFetching: true
-            }
-        }
-        case 'AUTOCOMPLETE_SUCCESS' : {
-            return {
-                ...state,
-                ...action.value,
-                birthday: new Date(action.value.birthday),
-                isFetching: false,
-            }
-        }
-        case 'AUTOCOMPLETE_ERROR' : {
-            return {
-                ...state,
-                isFetching: false,
-                error: action.error
-            }
-        }
-
-        default:
-            return state;
-    }
-
-
-    // Повертає новий об'єкт стану
-}
 
 const Index = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -88,13 +24,13 @@ const Index = () => {
         .then(res => res.json())
         .then(data => {
            dispatch({
-            type: 'AUTOCOMPLETE_SUCCESS',
+            type: ACTIONTYPES.AUTOCOMPLETE_SUCCESS,
             value: data
            })
         })
         .catch(error => {
             dispatch({
-                type: 'AUTOCOMPLETE_ERROR',
+                type: ACTIONTYPES.AUTOCOMPLETE_ERROR,
                 error
             })
         })
@@ -118,14 +54,14 @@ const Index = () => {
     const resetForm = (event) => {
         event.preventDefault()
         dispatch({
-            type: 'RESET_FORM'
+            type: ACTIONTYPES.RESET_FORM
         })
     }
 
     const autocomplete = (event) => {
         event.preventDefault();
         dispatch({
-            type: 'AUTOCOMPLETE_REQUEST'
+            type: ACTIONTYPES.AUTOCOMPLETE_REQUEST
         })
     }
 
