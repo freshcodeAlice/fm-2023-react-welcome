@@ -9,29 +9,69 @@ import React, {useState, useReducer} from 'react';
 */
 
 function reducer(state, action) {
-    console.log(action);
-    return {...state}; // Повертає новий об'єкт стану
+  switch(action.type) {
+    case 'firstName': {
+        return {
+            ...state,
+            firstName: action.value
+        }
+    }
+    case 'lastName': {
+        return {
+            ...state, 
+            lastName: action.value
+        }
+    }
+    case 'email': {
+        return {
+            ...state, 
+            email: action.value
+        }
+    }
+    case 'password': {
+        return {
+            ...state, 
+            password: action.value
+        }
+    }
+    case 'birthday': {
+        return {
+            ...state, 
+            birthday: action.value
+        }
+    }
+    case 'gender': {
+        return {
+            ...state, 
+            gender: action.value
+        }
+    }
+    default: 
+    return state;
+  }
+   
+
+    // Повертає новий об'єкт стану
 }
 
 const Index = () => {
-    const [state, dispatch] = useReducer(reducer);
+    const [state, dispatch] = useReducer(reducer, {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        birthday: '',
+        gender: ''
+    });
 
 
-    const submitAction = (event) => {
-        event.preventDefault();
-        dispatch({
-            test: 'value'
-        })
+    const changeHandler = ({target: {name, value}}) => {
+        const action = {
+            type: name,
+            value
+        }
+        dispatch(action);
     }
-
-
-
-    // const [firstName, setFirstName] = useState('');
-    // const [lastName, setLastName] = useState('');
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
-    // const [birthday, setBirthday] = useState('');
-    // const [gender, setGender] = useState('');
 
     // const changeHandler = ({target: {name, value}}) => {
     //    switch(name) {
@@ -72,9 +112,10 @@ const Index = () => {
     //     })
     // }
 
+   const {firstName, lastName, email, password, birthday} = state;
     return (
         <form>
-            {/* <input name="firstName" value={firstName} onChange={changeHandler}/>
+            <input name="firstName" value={firstName} onChange={changeHandler}/>
             <input name="lastName" value={lastName} onChange={changeHandler}/>
             <input name="email" value={email} onChange={changeHandler}/>
             <input name="password" type="password" value={password} onChange={changeHandler}/>
@@ -82,8 +123,8 @@ const Index = () => {
             <p>Gender</p>
            <label><input name="gender" type="radio" onChange={changeHandler} value="Male"/>Male</label> 
            <label><input name="gender" type="radio" onChange={changeHandler} value="Female" />Female</label> 
-           <label><input name="gender" type="radio" onChange={changeHandler} value="Non-binary"/>Non-binary</label>  */}
-            <button onClick={submitAction}>Submit</button>
+           <label><input name="gender" type="radio" onChange={changeHandler} value="Non-binary"/>Non-binary</label>  
+            <button >Submit</button>
         </form>
     );
 }
